@@ -1,21 +1,20 @@
-Todo list:
-1. To release:
-. In-table values edit
-. Filters: is null, enum, typed filters
+## Todo list
+1. In-table values edit
+1. Filters: is null, enum, typed filters
 
-2. Future plans
-. Better errors handling
-. Better disconnection handling (modal message)
-. Table service (optimization, flush and so on)
-. Big-text editor
-. Indices - add/edit/remove
-. Export
-. Import
-. Queries log
-. Users and privileges
-. Remote DB connection
-. Partitions
-. Triggers
-. JSON editor
-. Simultaneous sessions list
-. Backend performance/memory control
+## Future plans
+1. Better errors handling
+1. Better disconnection handling (modal message)
+1. Table service (optimization, flush and so on)
+1. Big-text editor
+1. Indices - add/edit/remove
+1. Export
+1. Import
+1. Queries log
+1. Users and privileges
+1. Remote DB connection
+1. Partitions
+1. Triggers
+1. JSON editor
+1. Simultaneous sessions list
+1. Backend performance/memory control
