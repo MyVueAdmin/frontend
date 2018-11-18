@@ -1,4 +1,5 @@
 import queries from './connectionQueries.js'
+import store from '../store';
 
 export default {
   install (Vue, options) {
@@ -11,7 +12,10 @@ export default {
           return g_config
         }
       },
-      server() { return this.settings().server },
+      server() {
+        if (store.state.server && store.state.server !='') return store.state.server
+        return this.settings().server
+      },
       /* base methods */
       prepare(what, variables) {
         var query = queries.get(what)
@@ -26,7 +30,7 @@ export default {
         return query
       },
       clearLocalStorage(){
-        var safe = ['lang', 'last_login']
+        var safe = ['lang', 'last_login', 'server']
         var keys = Vue.prototype.$storage.keys()
         keys.forEach(key => {
           if (safe.indexOf(key) < 0) Vue.prototype.$storage.removeItem(key)
@@ -118,6 +122,7 @@ export default {
       },
       /* methods for authorization and authentication */
       establish (credentials, clear) {
+        clear = false
         if (clear) { // clearing is optional for future (case of «inline» log-in)
           this.clearLocalStorage()
         }

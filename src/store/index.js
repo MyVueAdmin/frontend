@@ -9,6 +9,7 @@ export default new Vuex.Store({
   strict: true,
   modules: { parser, styles, constants },
   state: {
+    server: '',
     lang: 'en',
     onpage: 0,
     loading: false,
@@ -45,7 +46,8 @@ export default new Vuex.Store({
     database (me, val) { me.database = val },
     lang (me, val) { me.lang = val },
     onpage (me, val) { me.onpage = val },
-    navigation (me, val) { me.navigation = val }
+    navigation (me, val) { me.navigation = val },
+    server (me, val) { me.server = val }
   },
   actions: {
     startLoading (me) {

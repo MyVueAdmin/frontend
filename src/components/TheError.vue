@@ -1,8 +1,8 @@
 <template>
   <TheModalBase
     v-bind:header = "$dict.get().servererror"
-    v-bind:body = "error.message"
-    v-bind:footer = "error.query.query"
+    v-bind:body = "message"
+    v-bind:footer = "query"
     class = "modal-error"
     @close = "close()"
   />
@@ -14,6 +14,14 @@ export default {
   name: 'TheError',
   components: { TheModalBase },
   computed: {
+    message () {
+      if (!this.error) return null
+      return this.error.message
+    },
+    query () {
+      if (!this.error) return null
+      return this.error.query ? this.error.query.query : ''
+    },
     error () { return this.$store.state.error }
   },
   methods: {

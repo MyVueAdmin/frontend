@@ -3,7 +3,12 @@
 <script>
 export default {
   name: 'Check',
-  mounted () { this.$connection.check() }
+  mounted () {
+    if (this.$storage.hasItem('server')) {
+      this.$store.commit('server', this.$storage.getItem('server'))
+    }
+    this.$connection.check()
+  }
 }
 </script>
 

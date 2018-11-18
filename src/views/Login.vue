@@ -20,6 +20,13 @@
             type="password"
             placeholder="Password"
             @keyup="checkKeyup" >
+          <input
+            v-if="serverShow || server"
+            ref="server"
+            v-model="server"
+            v-bind:disabled = "connecting"
+            placeholder="Backend address"
+            >
         </div>
         <transition-group>
           <LinkBase
@@ -37,6 +44,13 @@
             key="answer">{{ answer | databaseAnswer }}</div>
         </transition-group>
       </div>
+    <div id="server">
+      <LinkBase
+        v-bind:button="true"
+        icon="server"
+        @click="serverToggle()" />
+    </div>
+
     </div>
   </div>
 </template>
@@ -51,8 +65,17 @@ export default {
       return str
     }
   },
-  data: () => ({ username: '', password: '', answer: '', connecting: false }),
+  data: () => ({ username: '', password: '', answer: '', connecting: false, serverShow: false }),
   computed: {
+    server: {
+      set(val) {
+        this.$storage.setItem('server',val)
+        this.$store.commit('server',val)
+      },
+      get() {
+        return this.$store.state.server
+      },
+    },
     showButton() {
       return !this.connecting && this.username && this.password
     },
@@ -72,6 +95,14 @@ export default {
     this.focus(true)
   },
   methods: {
+    serverToggle() {
+      if (this.serverShow || this.server) {
+        this.serverShow = false
+        this.server = ''
+      } else {
+        this.serverShow = true
+      }
+    },
     checkKeyup (event) {
       this.answer = ''
       if (event.key === 'Enter' && !this.focus()) this.connect()
@@ -160,6 +191,34 @@ export default {
       font-size: 10pt;
       color:$color-ui-4;
       font-style: italic;
+    }
+
+
+    #server {
+      position:fixed;
+      width:100%;
+      left:0;
+      top:0;
+      line-height:30px;
+      height:30px;
+      text-align:left;
+      color:RGBA(0,0,0,0.2);
+      font-size:13px;
+    }
+
+    #server a {
+      display:block;
+      float:left;
+      width:30px;
+      height:30px;
+      font-size:22px;
+      background: transparent;
+      color:RGBA(0,0,0,0.2);
+      margin-right:0px;
+    }
+
+    #server a:hover {
+      color:RGBA(0,0,0,0.5);
     }
 
     .v-enter-active { opacity: 1; transition: all .5s ease; }
