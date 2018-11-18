@@ -3,8 +3,6 @@ node_modules
 /dist
 /nbproject
 /nbproject/*
-/src/nbproject
-/src/nbproject/*
 
 # local env files
 .env.local
