@@ -1,21 +1,28 @@
-# mva-frontend
+MyVueAdmin frontend source
 
-## Project setup
+# Dependencies
+Vue.js at least v2.5.17
+
+# Project setup
+Clone repo and install npm-modules and dependencies with something like:
 ```
+git clone https://github.com/MyVueAdmin/frontend.git mva-frontend
+cd mva-frontend
 npm install
 ```
 
-### Compiles and hot-reloads for development
+# Project commands
+All these are standard vue-project commands. Also you can just import project with Vue UI :)
+## Compiles and hot-reloads for development
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
+## Compiles and minifies for production
 ```
 npm run build
 ```
-
-### Lints and fixes files
+## Lints and fixes files
 ```
 npm run lint
 ```
+
