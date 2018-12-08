@@ -35,7 +35,7 @@
       v-if = "!loading && data.length==0"
       class = "nothing-message"
       @click="searchClear()">{{ $dict.get().nothingfound }}</div>
-    <ActionsBlock>
+    <TheActions>
       <DataGridPagination
         v-if = "total > limit"
         slot="pagination"
@@ -58,12 +58,12 @@
         @click="resetFilters()"
       />
       <slot name = "actions" />
-    </ActionsBlock>
+    </TheActions>
   </div>
 </template>
 
 <script>
-import ActionsBlock from './ActionsBlock'
+import TheActions from './TheActions'
 import DataGridPagination from './DataGridPagination'
 import DataGridHead from './DataGridHead'
 import DataGridRow from './DataGridRow'
@@ -72,7 +72,7 @@ import InputBase from './InputBase'
 import Search from '../mixins/Search'
 export default {
   name: 'DataGrid',
-  components: { DataGridHead, DataGridRow, DataGridPagination, InputBase, ActionsBlock },
+  components: { DataGridHead, DataGridRow, DataGridPagination, InputBase, TheActions },
   mixins: [ Search ],
   props: {
     data: { type: [Object, Array, String, Number], default: '' },

@@ -58,7 +58,7 @@ export default {
             var action = {}
             if (link.name ===  this.$route.name) { // if default route is active
               action = this.navigationItem(route.children.find(child => child.path === 'add'))
-            } else { // if default one of sub-routes is active
+            } else { // if one of sub-routes is active
               action = Object.assign(Object.assign({},link), {icon:'arrow-left', label: 'back'})
             }
             if (action) out.actions.push(action)

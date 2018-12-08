@@ -12,7 +12,6 @@
     }"
     @click.native = "click"
   >
-    <slot />
     <div
       v-if="label"
       v-bind:class = "{label:icon,noselect:true}"
@@ -23,6 +22,12 @@
       v-bind:class="{icon: label}"
       v-bind:icon="icon"
     />
+    <faIcon
+      v-if="iconHover"
+      v-bind:class="{icon: label, iconHover: true}"
+      v-bind:icon="iconHover"
+    />
+    <slot />
   </router-link>
 </template>
 
@@ -50,21 +55,16 @@ export default {
 
 <style lang="scss">
 @import "../assets/css/vars.scss";
-
-.linkbase {
-  overflow:hidden;}
-
 .link, .action {
   overflow:hidden;
   display: block;
   text-decoration: none;
   text-align: center;
   outline: none;
-  overflow:hidden;
 }
 
 .link *, .action * {
-  /* transition: all 0.2s; */
+  transition: all 0.2s;
 }
 
 .link, .link.nohover:hover {
@@ -78,8 +78,9 @@ export default {
 }
 
 .link.active, .link.active:hover,.link.active.nohover:hover {
+  /* cursor: default; */
   background: $color-act-mid;
-  box-shadow: RGBA(0,0,0,0.3) -2px 2px 15px 0px inset;
+  box-shadow: RGBA(0,0,0,0.2) -2px 2px 15px 0px inset;
   color: $color-ui-0 !important;
 }
 
@@ -106,63 +107,42 @@ export default {
   cursor:default;
 }
 
-.linkbase .icon {
-  display:block;
+.icon {
+  display:inline-block;
+  font-size: 22px;
+  width: inherit;
+  height: inherit;
   background:transparent;
   opacity:0.8;
-  transition:all 0.2s;
-  transition-delay: 0s !important;
+  transition:all 0.2s ease-in;
+  margin-top:39px;
   font-weight: normal;
-  padding:5px;
-  box-sizing: border-box;
-  width: 40%;
-  height:100%;
-  float: right;
-  text-align: right;
+}
+
+/*.linkbase.enabled:hover .icon {*/
+.linkbase.enabled .icon {
+  margin-top:-5px;
+  margin-left:35px;
+  font-size:44px;
+  opacity:0.1;
+}
+
+/*.linkbase.enabled:hover .label{*/
+.linkbase.enabled .label{
+  opacity:1;
+  margin-top:4px;
+}
+
+.linkbase .label {
+  text-align:left;
+  line-height: 12px;
+  height: 0px;
+  padding:0 2px 0 5px;
+  margin:0 auto;
+  margin-top:-39px;
   opacity: 1.0;
-  overflow: visible;
-  opacity:0.5;
-  color: $color-ui-0;
-
-}
-
-.linkbase.enabled:hover .icon {
-  opacity:0.2;
-  height:130%;
-  width:50%;
-  margin: -5px  0 0 0;
-  padding:0px 5px 0 0;
-}
-
-
-.linkbase.link .icon
-{  color: $color-ui-2; }
-
-.linkbase.link:hover .icon
-{  color: $color-act-mid; }
-
-.linkbase.link.active .icon
-{  color: $color-ui-0; }
-
-.linkbase.link.active:hover .icon
-{  color: $color-ui-0; }
-
-.linkbase.link:hover .icon
-{  color: $color-act-mid; }
-
-
-.linkbase .label{
-  display: block;
-  text-align: left;
-  font-size: 13px;
-  line-height: 13px;
-  padding:5px 5px 0 5px;
-  margin-bottom: -5px;
-  box-sizing: content-box;
-  overflow: visible;
-  width: 65%;
-  height: 0;
-  /*transition:all 0.2s ease-in;*/
+  font-size: 11px;
+  transition:all 0.2s ease-in;
 }
 
 .linkbase.disabled {

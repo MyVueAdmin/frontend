@@ -1,5 +1,6 @@
 <template>
   <div id="the_navigation">
+    <!-- left-side panel -->
     <nav
       id = "nav"
       ref="nav">
@@ -21,18 +22,28 @@
         id="nav-border"
         class="margin-background" />
     </nav>
-    <TheNavigationModes />
+    <!-- main-nav block -->
+    <ButtonsHolder position="top" v-bind:transition="true">
+      <LinkBase
+        v-for = "item in modesOut"
+        v-bind:key = "[item.to,item.label].join()"
+        v-bind:active = "item.active || item.activeIndirect"
+        v-bind:to = "{name: item.name}"
+        v-bind:icon = "item.icon"
+        v-bind:label = "item.label"
+      />
+    </ButtonsHolder>
   </div>
 </template>
 
 <script>
 import TheNavigationDatabases from './TheNavigationDatabases'
 import TheNavigationTables from './TheNavigationTables'
-import TheNavigationModes from './TheNavigationModes'
+import ButtonsHolder from './ButtonsHolder'
 import Routes from '../mixins/Routes'
 export default {
   name: 'TheNavigation',
-  components: { TheNavigationTables, TheNavigationDatabases, TheNavigationModes },
+  components: { TheNavigationTables, TheNavigationDatabases, ButtonsHolder },
   mixins: [Routes],
   data () {
     return {
@@ -43,6 +54,9 @@ export default {
     }
   },
   computed: {
+    modesOut() {
+      return this.$store.state.navigation.links
+    },
     menuSymbol () {
       return this.active ? '☷' : '☰'
     },

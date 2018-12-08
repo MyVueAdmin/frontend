@@ -26,7 +26,7 @@
         />
       </div>
     </div>
-    <ActionsBlock>
+    <TheActions>
       <LinkBase
         v-if = "!insert"
         v-bind:disabled = "changed === 0"
@@ -60,17 +60,17 @@
         icon="trash"
         label="del"
         @click="del()" />
-    </ActionsBlock>
+    </TheActions>
   </div>
 </template>
 
 <script>
 import InputBase from './InputBase'
-import ActionsBlock from './ActionsBlock'
+import TheActions from './TheActions'
 import Search from '../mixins/Search'
 export default {
   name: 'DataEditor',
-  components: { InputBase, ActionsBlock },
+  components: { InputBase, TheActions },
   mixins: [ Search ],
   props: {
     data: {type: Array, required: true}, // { label, type, value, info, options }

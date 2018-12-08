@@ -26,7 +26,7 @@ export default {
           'load': 'Load',
           'del': 'Delete',
           'copy': 'Save as copy',
-          'copy_struct': 'Save as copy without content',
+          'copy_struct': 'Save as copy structure only',
           'reset': 'Reset',
           'searchpage': 'Filter fields',
           'structure': 'Structure',
