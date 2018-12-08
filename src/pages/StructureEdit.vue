@@ -128,10 +128,12 @@ export default {
         this.positions.push({label: labelFirst, value: 'FIRST'})
         answer.forEach((val, idx) => {
           var label = val.Field
-          if (label === this.entity) {
-            this.values = Object.assign({'Position': this.positions[idx].value}, answer[idx])
-          } else {
+          if (label !== this.entity || this.copy) {
             this.positions.push({label, value: label})
+          }
+          if (label === this.entity) {
+            var position = this.copy ? this.entity : this.positions[idx].value
+            this.values = Object.assign({'Position': position}, val)
           }
         }, this)
 
