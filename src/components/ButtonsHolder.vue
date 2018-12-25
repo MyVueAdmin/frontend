@@ -1,8 +1,14 @@
 <template>
-  <div ref="button-holder-static" class="buttons-holder-static" >
-    <div ref ="button-holder" v-bind:class="classes" >
+  <div 
+    ref="button-holder-static" 
+    class="buttons-holder-static" >
+    <div 
+      ref ="button-holder" 
+      v-bind:class="classes" >
       <slot name = "pagination" />
-      <transition-group v-if="transition" name="buttons-holder">
+      <transition-group 
+        v-if="transition" 
+        name="buttons-holder">
         <slot />
       </transition-group>
       <slot v-else />

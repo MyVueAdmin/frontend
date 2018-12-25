@@ -1,15 +1,17 @@
 <template>
   <ButtonsHolder position="bottom">
-      <slot name="pagination" slot="pagination" />
-      <LinkBase
-        v-for = "item in actions"
-        v-bind:key = "[item.name,item.label].join()"
-        v-bind:to = "{name: item.name}"
-        v-bind:icon = "item.icon"
-        v-bind:label = "item.label"
-        v-bind:button = "true"
-      />
-      <slot />
+    <slot 
+      slot="pagination" 
+      name="pagination" />
+    <LinkBase
+      v-for = "item in actions"
+      v-bind:key = "[item.name,item.label].join()"
+      v-bind:to = "{name: item.name}"
+      v-bind:icon = "item.icon"
+      v-bind:label = "item.label"
+      v-bind:button = "true"
+    />
+    <slot />
   </ButtonsHolder>
 </template>
 

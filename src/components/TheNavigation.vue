@@ -23,7 +23,9 @@
         class="margin-background" />
     </nav>
     <!-- main-nav block -->
-    <ButtonsHolder position="top" v-bind:transition="true">
+    <ButtonsHolder 
+      v-bind:transition="true" 
+      position="top">
       <LinkBase
         v-for = "item in modesOut"
         v-bind:key = "[item.to,item.label].join()"

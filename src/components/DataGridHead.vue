@@ -22,7 +22,9 @@
         class="name"
         @click = "applyOrder(field)">
         <span class="order">{{ orderMark(field) }}</span>
-        {{ foundOut(field, 0) }}<span v-if='field == found' class='found'>{{ foundOut(field, 1) }}</span>{{ foundOut(field, 2) }}
+        {{ foundOut(field, 0) }}<span
+          v-if="field == found"
+          class="found">{{ foundOut(field, 1) }}</span>{{ foundOut(field, 2) }}
       </div>
       <div
         v-if = "field === filter && !disableFilters"

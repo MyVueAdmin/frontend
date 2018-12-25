@@ -1,5 +1,7 @@
 <template>
-  <div class="editor" ref="editor">
+  <div
+    ref="editor"
+    class="editor">
     <div
       v-if = "dataOut.length === 0"
       class="nothing-message">
@@ -9,8 +11,12 @@
       v-for = "item in dataOut"
       v-bind:key = "item.index"
       class="field">
-      <div class="label" v-bind:id=" 'label-' + item.label ">
-        {{ foundOut(item.label, 0) }}<span v-if='item.label == found' class='found'>{{ foundOut(item.label, 1) }}</span>{{ foundOut(item.label, 2) }}
+      <div
+        v-bind:id=" 'label-' + item.label "
+        class="label">
+        {{ foundOut(item.label, 0) }}<span
+          v-if="item.label == found"
+          class="found">{{ foundOut(item.label, 1) }}</span>{{ foundOut(item.label, 2) }}
         <div
           v-if = "item.info"
           class="info"
@@ -85,7 +91,6 @@ export default {
   computed: {
 
     dataOut () {
-      var out = []
       if (!this.data) return []
       if (!this.data.length) return []
       this.checkSearch()

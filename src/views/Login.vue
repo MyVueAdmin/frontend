@@ -26,7 +26,7 @@
             v-model="server"
             v-bind:disabled = "connecting"
             placeholder="Backend address"
-            >
+          >
         </div>
         <transition-group>
           <LinkBase
@@ -44,12 +44,12 @@
             key="answer">{{ answer | databaseAnswer }}</div>
         </transition-group>
       </div>
-    <div id="server">
-      <LinkBase
-        v-bind:button="true"
-        icon="server"
-        @click="serverToggle()" />
-    </div>
+      <div id="server">
+        <LinkBase
+          v-bind:button="true"
+          icon="server"
+          @click="serverToggle()" />
+      </div>
 
     </div>
   </div>
