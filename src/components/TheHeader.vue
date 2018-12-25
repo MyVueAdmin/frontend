@@ -6,9 +6,9 @@
           v-model="searchOnPage"
           v-bind:placeholder = "$dict.get().searchpage"
           class="seacrh-on-page"
+          type = "search"
           @input = "searchSkipClear"
-          @keyup.native = "searchSkipCheck"
-          type = "search" />
+          @keyup.native = "searchSkipCheck" />
         <LinkBase
           v-bind:class="menuClasses"
           v-bind:button = "true"

@@ -24,9 +24,9 @@ export default {
       var idx = txtLower.indexOf(searched)
       var len = searched.length
       switch (part) {
-        case 0: return txt.substr(0,idx)
-        case 1: return txt.substr(idx,len)
-        case 2: return txt.substr(idx + len)
+      case 0: return txt.substr(0,idx)
+      case 1: return txt.substr(idx,len)
+      case 2: return txt.substr(idx + len)
       }
       return this.searched
     },

@@ -8,8 +8,8 @@
     </th>
     <th
       v-for = "(field, index) in fields"
-      v-bind:id = "'th-' + field"
       ref = "th"
+      v-bind:id = "'th-' + field"
       v-bind:key = "index"
       v-bind:class="{active: field === filter}" >
       <LinkBase
