@@ -6,6 +6,8 @@
           v-model="searchOnPage"
           v-bind:placeholder = "$dict.get().searchpage"
           class="seacrh-on-page"
+          @input = "searchSkipClear"
+          @keyup.native = "searchSkipCheck"
           type = "search" />
         <LinkBase
           v-bind:class="menuClasses"
@@ -63,7 +65,23 @@ export default {
   methods: {
     toggleMenu (val) {
       this.menu = val
+    },
+    searchSkipClear() {
+      this.$store.commit('searchSkip', 0)
+    },
+    searchSkipCheck(event) {
+      if (event.key == 'Enter') {
+        var current = this.$store.state.searchSkip
+        var m = event.ctrlKey ? -1 : 1
+        var max = this.$store.state.searchMax
+        var skip = current + m
+        if (skip < 0) skip = max - 1
+        if (skip > max - 1) skip = 0
+
+        this.$store.commit('searchSkip', skip)
+      }
     }
+
   },
 }
 </script>

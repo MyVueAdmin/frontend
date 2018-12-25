@@ -1,5 +1,5 @@
 <template>
-  <div class="editor">
+  <div class="editor" ref="editor">
     <div
       v-if = "dataOut.length === 0"
       class="nothing-message">
@@ -9,8 +9,8 @@
       v-for = "item in dataOut"
       v-bind:key = "item.index"
       class="field">
-      <div class="label">
-        {{ item.label }}
+      <div class="label" v-bind:id=" 'label-' + item.label ">
+        {{ foundOut(item.label, 0) }}<span v-if='item.label == found' class='found'>{{ foundOut(item.label, 1) }}</span>{{ foundOut(item.label, 2) }}
         <div
           v-if = "item.info"
           class="info"
@@ -79,26 +79,18 @@ export default {
   data () {
     return {
       values: this.extractValues(),
-      dataUpdated: false
+      dataUpdated: false,
     }
   },
   computed: {
+
     dataOut () {
       var out = []
       if (!this.data) return []
       if (!this.data.length) return []
-      var reg = this.searchRegExp(false)
-      this.data.forEach((val, idx) => {
-        if (!reg || (reg && val.label.toString().search(reg) > -1)) {
-          var item = Object.assign({}, val)
-          item.index = idx
-          item.ref = 'input-' + idx
-          out.push(item)
-        }
-      })
-
+      this.checkSearch()
       this.setUpdated()
-      return out
+      return this.data
     },
     changed () {
       var out = 0
@@ -122,6 +114,34 @@ export default {
 
   },
   methods: {
+    checkSearch() {
+      this.found = ''
+      var reg = this.searchRegExp(this.searchOnPage)
+      if (!reg) return false
+      var results = -1
+      var resultsMax = 0
+      var element = null
+      this.data.forEach(f => {
+        if (f.label.toString().search(reg) > -1){
+          resultsMax++
+          if (!element || results < this.searchSkip) {
+            element = document.getElementById('label-' + f.label)
+            var delta = this.$refs.editor ? this.$refs.editor.offsetTop : 0
+            if (element) {
+              results ++;
+              this.found = f.label
+              window.scrollTo({
+                top: element.offsetTop - delta,
+                left: 0,
+                behavior: 'smooth'
+              });
+            }
+          }
+        }
+      })
+      this.$store.commit('searchMax', resultsMax)
+      return true
+    },
     classes (item) {
       return {
         'value-input':true,

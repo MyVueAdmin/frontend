@@ -16,6 +16,7 @@
         v-bind:filters = "filters"
         v-bind:control = "control"
         v-bind:controls = "controls"
+        v-bind:found = "found"
         v-bind:disable-filters = "disableFilters"
         @order = "changeOrder"
         @filters = "changeFilters"
@@ -88,7 +89,7 @@ export default {
   },
   data () {
     return {
-      marked: -1
+      marked: -1,
     }
   },
   computed: {
@@ -119,22 +120,45 @@ export default {
     },
     fieldsOut () {
       var out = []
+      this.checkSearch()
       if (!this.data && this.filters) return []
       if (!this.data.length && this.filters) {
         out = Object.keys(this.filters)
         return out
       }
       if (!this.data.length) return []
-      var reg = this.searchRegExp(this.searchOnPage)
-      var row = this.fieldsAll
-      if (!reg) return row
-      row.forEach(f => {
-        if (reg && f.toString().search(reg) > -1) out.push(f)
-      })
-      return out
+      return this.fieldsAll
     }
   },
   methods: {
+    checkSearch() {
+      this.found = ''
+      var reg = this.searchRegExp(this.searchOnPage)
+      var row = this.fieldsAll
+      var results = -1
+      var resultsMax = 0
+      if (!reg) return false
+      var element = null
+      row.forEach(f => {
+        if (reg && f.toString().search(reg) > -1){
+          resultsMax++
+          if (!element || results < this.searchSkip) {
+            element = document.getElementById('th-' + f);
+            results ++
+            if (element) {
+              this.found = f
+              window.scrollTo({
+                top: 0,
+                left: element.offsetLeft,
+                behavior: 'smooth'
+              });
+            }
+          }
+        }
+      })
+      this.$store.commit('searchMax', resultsMax)
+      return true
+    },
     needResetFilters () {
       for (var i in this.filters) {
         if (this.filters[i] && this.filters[i].collation) return true

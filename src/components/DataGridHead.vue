@@ -8,6 +8,7 @@
     </th>
     <th
       v-for = "(field, index) in fields"
+      v-bind:id = "'th-' + field"
       ref = "th"
       v-bind:key = "index"
       v-bind:class="{active: field === filter}" >
@@ -21,10 +22,10 @@
         class="name"
         @click = "applyOrder(field)">
         <span class="order">{{ orderMark(field) }}</span>
-        {{ field }}
+        {{ foundOut(field, 0) }}<span v-if='field == found' class='found'>{{ foundOut(field, 1) }}</span>{{ foundOut(field, 2) }}
       </div>
-      <div 
-        v-if = "field === filter && !disableFilters" 
+      <div
+        v-if = "field === filter && !disableFilters"
         v-bind:class="filterHolderClasses(index)">
         <DataGridFilter
           v-if = "field === filter && !disableFilters"
@@ -45,9 +46,11 @@
 
 <script>
 import DataGridFilter from './DataGridFilter'
+import Search from '../mixins/Search'
 export default {
   name: 'DataGridHead',
   components: {DataGridFilter},
+  mixins: [Search],
   props: {
     order: { type: [Object, Boolean], default: false, required: false },
     filters: { type: [Object, Boolean], default: false, required: false },

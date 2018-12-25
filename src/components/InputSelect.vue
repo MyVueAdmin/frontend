@@ -17,7 +17,7 @@ export default {
   name: 'InputSelect',
   props: {
     value: { type: [Object, String, Number], default: null },
-    options: { type: [Object, Array], default: () => { return {} } },
+    options: { type: [Object, Array], default: () => ({}) },
     disabled: { type: Boolean, default: false }
   },
   data: function () { return { valueRaw: this.value } },

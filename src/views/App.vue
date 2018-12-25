@@ -258,4 +258,9 @@ h1 span {color:#555;}
   left:0;
   top:0;
 }
+
+.found {
+  background: yellow;
+  color: #333;
+}
 </style>
