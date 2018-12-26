@@ -8,7 +8,7 @@
       {{ $dict.get().norows }}
     </div>
     <div
-      v-for = "item in dataOut"
+      v-for = "(item, index) in dataOut"
       v-bind:key = "item.index"
       class="field">
       <div
@@ -24,7 +24,7 @@
       </div>
       <div class="value">
         <InputBase
-          v-model = "values[item.index]"
+          v-model = "values[index]"
           v-bind:type = "item.type"
           v-bind:options = "item.options"
           v-bind:disabled = "item.disabled"
