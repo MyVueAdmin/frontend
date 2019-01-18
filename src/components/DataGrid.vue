@@ -116,7 +116,7 @@ export default {
       return {rows, controls, indices}
     },
     fieldsAll () {
-        return this.data[0] ? Object.keys(this.data[0]) : []
+      return this.data[0] ? Object.keys(this.data[0]) : []
     },
     fieldsOut () {
       var out = []
