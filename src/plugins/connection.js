@@ -77,7 +77,7 @@ export default {
 
         this.setLoading(true)
         return fetch(this.server(), options).then(response => response.text(), reponse =>{
-          return this.connectionError(reponse)
+          return reponse
         }).then(
           response => {
             this.setLoading(false)
@@ -93,8 +93,8 @@ export default {
         } catch (e) {
           answer.status = 'error'
           answer.data = this.connectionError(response)
-
         }
+
         if (answer.status === 'error') {
           this.setError(answer.data, query)
         }
@@ -131,6 +131,7 @@ export default {
           if (data.status === 'success') {
             this.setToken(data.token, data.expire)
             this.setStatus(true, true)
+            this.setError(null, null)
             return true
           }
           return data.data
@@ -177,7 +178,11 @@ export default {
       },
       /* commits and dispatches to Vuex */
       setError (message, query) {
-        this.commit('error', {message, query})
+        if (message == null && query == null) {
+          this.commit('error', null)
+        } else {
+          this.commit('error', {message, query})
+        }
       },
       setStatus (connected, checked) {
         this.commit('connected', connected)
