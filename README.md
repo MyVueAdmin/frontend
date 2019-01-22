@@ -1,7 +1,7 @@
 MyVueAdmin frontend source
 
 # Dependencies
-Vue.js at least v2.5.17
+Vue.js at least v2.5.22
 
 # Project setup
 Clone repo and install npm-modules and dependencies with something like:

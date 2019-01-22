@@ -1,7 +1,7 @@
 module.exports = {
   productionSourceMap: false,
   lintOnSave: false,
-  baseUrl: "",
+  publicPath: "",
   assetsDir: "assets",
   // filenameHashing: false,
   css:{
