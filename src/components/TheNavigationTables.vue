@@ -79,6 +79,7 @@ export default {
     },
     tablesFiltered () {
       var out = []
+      if (!this.tables) return []
       this.tables.forEach((table,index)=> {
         if (this.checkItem(table,index, out.length)) {
           out.push({

@@ -108,6 +108,7 @@ export default {
       return out
     },
     process (data) {
+      if (!data) return []
       return data.map(val => this.processRow(val))
     },
     send () {
