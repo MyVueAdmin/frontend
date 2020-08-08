@@ -5,16 +5,24 @@
       v-bind:data = "data"
       v-bind:insert = "table === null"
       @update = "update"
-      @insert = "copy"
+      @insert = "insert"
       @del = "del"
       @change = "change"
     >
       <LinkBase
+        v-if="table !== null"
         v-bind:button = "true"
         icon="copy"
         label="copy_struct"
-        @click="insert()" />
+        @click="copyStruct()" />
       <LinkBase
+        v-if="table !== null"
+        v-bind:button = "true"
+        icon="copy"
+        label="copy"
+        @click="copy()" />
+      <LinkBase
+        v-if="table !== null"
         v-bind:button = "true"
         icon="eraser"
         label="truncate"
@@ -102,7 +110,7 @@ export default {
       }
       this.mutations = [{what: 'copyTableStruct', options}, {what: 'copyTable', options}]
     },
-    insert () {
+    copyStruct () {
       this.name = this.valuesChanged['table_name']
       if (!this.name) this.name = this.table
       var options = {
@@ -111,6 +119,15 @@ export default {
         name: this.name
       }
       this.mutations = [{what: 'copyTableStruct', options}]
+    },
+    insert () {
+      console.log(this.valuesChanged)
+      var options = {
+        database: this.database,
+        table: this.valuesChanged['table_name'],
+        engine: this.valuesChanged['engine'],
+      }
+      this.mutations = [{what: 'createTable', options}]
     },
     update (data) {
       this.mutations = []
@@ -253,12 +270,15 @@ export default {
       })
     },
     load () {
-      this.loadValues().then(() => this.buildData())
+      if (this.table !== null ) this.loadValues().then(() => this.buildData())
       this.loadEngines().then(() => this.buildData())
       this.loadCollations().then(() => this.buildData())
     },
     change(data) {
+      // console.log(' --- change')
+
       if (!this.loaded || this.data.length === 0) return false
+      // console.log('ok')
       data.forEach(val => {
         this.valuesChanged[val.label] = val.value
         if (val.label === 'engine') {

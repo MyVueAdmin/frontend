@@ -56,6 +56,7 @@
       <LinkBase
         v-if = "insert"
         v-bind:button = "true"
+        v-bind:disabled = "changed === -1"
         icon="check"
         label="add"
         @click="copy()" />
@@ -89,7 +90,6 @@ export default {
     }
   },
   computed: {
-
     dataOut () {
       if (!this.data) return []
       if (!this.data.length) return []
@@ -98,6 +98,7 @@ export default {
       return this.data
     },
     changed () {
+      // console.log('check changed')
       var out = 0
       this.data.forEach((val, idx) => {
         out += (this.values[idx] != val.value)

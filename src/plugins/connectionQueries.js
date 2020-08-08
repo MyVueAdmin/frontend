@@ -28,6 +28,7 @@ export default {
     renameTable: {template: 'RENAME TABLE `$database$`.`$table$` TO `$name$`', return: 'status'},
     copyTable: { template: 'INSERT `$name$` SELECT * FROM `$table$`', return: 'status'},
     copyTableStruct: { template: 'CREATE TABLE `$name$` LIKE `$table$`', return: 'status'},
+    createTable: { template: 'CREATE TABLE IF NOT EXISTS `$table$` ($columns$) ENGINE=$engine$', return: 'status'},
 
     delTable: { template: 'DROP TABLE `$table$`', return: 'status'},
     truncateTable: { template: 'TRUNCATE TABLE `$table$`', return: 'status'},
